@@ -91,4 +91,7 @@ typings/
 # PHPstorm
 .idea
 
+# Nextjs
+.next
+
 # End of https://www.gitignore.io/api/node,macos
