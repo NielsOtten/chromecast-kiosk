@@ -13,8 +13,6 @@ app.prepare()
   .then(async () => {
     const server = express();
 
-    app.use(settings);
-
     server.get('*', (req, res) => handle(req, res));
 
     server.listen(port, (err) => {
