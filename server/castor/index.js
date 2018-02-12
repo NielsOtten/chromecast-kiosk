@@ -1,5 +1,5 @@
 import NodeCastor from 'nodecastor';
-import Device from '../../models/device';
+import Device from '../models/device';
 
 const CAST_APP_ID = 'EA81AB3C';
 
@@ -8,6 +8,9 @@ class Castor {
     this.scan();
   }
 
+  /**
+   * Scan for chromecasts.
+   */
   scan() {
     NodeCastor
       .scan()
@@ -19,6 +22,7 @@ class Castor {
           await this.addDevice(device);
         }
 
+        // connect + start watching status.
         this.initDevice(device);
       })
       .on('offline', (device) => {
@@ -27,21 +31,35 @@ class Castor {
       .start();
   }
 
+  /**
+   * Check if the device exists in mongoDB with a given device.
+   * @param id number
+   * @return {Query|void}
+   */
   deviceExists({ id }) {
     return Device.findOne({ _id: id });
   }
 
+  /**
+   * Add device to mongoDB.
+   * @param id number
+   * @return {Promise}
+   */
   addDevice({ id }) {
     console.info('[CK] Adding device: ', id);
     return new Device({ _id: id }).save();
   }
 
+  /**
+   * Connect to device and check if ready for takeover.
+   * Will takeover when status is backdrop.
+   * @param device
+   */
   initDevice(device) {
     try {
       device
         .on('connect', () => {
           console.info('[CK] Connect to: %s', device.address);
-          this.checkTakeover(device);
         })
         .on('status', (status) => {
           if(status.applications) {
@@ -55,6 +73,10 @@ class Castor {
     }
   }
 
+  /**
+   * Check if status is Backdrop.
+   * @param device
+   */
   checkTakeover(device) {
     try {
       device.status((error, status) => {
@@ -72,6 +94,10 @@ class Castor {
     }
   }
 
+  /**
+   * Takeover device with the specified app id.s
+   * @param device
+   */
   takeOver(device) {
     try {
       console.info('[CK] Taking over device ', device.address);
