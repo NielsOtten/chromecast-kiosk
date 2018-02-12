@@ -1,6 +1,8 @@
 import express from 'express';
 import next from 'next';
 import mongoose from 'mongoose';
+import path from 'path';
+
 import castor from './castor';
 
 const port = parseInt(process.env.PORT, 10) || 3000;

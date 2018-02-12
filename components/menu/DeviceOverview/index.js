@@ -2,13 +2,24 @@ import React from 'react';
 
 import Device from '../Device/teaser';
 
-const DeviceOverview = () => (
-  <div>
+// styled
+import DeviceOverview from './styled/DeviceOverview';
+
+const DeviceView = () => (
+  <DeviceOverview>
     <Device />
-  </div>
+    <Device />
+    <Device />
+    <Device />
+    <Device />
+    <Device />
+    <Device />
+    <Device />
+    <Device />
+  </DeviceOverview>
 );
 
-DeviceOverview.propTypes = {};
-DeviceOverview.defaultProps = {};
+DeviceView.propTypes = {};
+DeviceView.defaultProps = {};
 
-export default DeviceOverview;
+export default DeviceView;
