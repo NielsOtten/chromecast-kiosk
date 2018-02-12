@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default () => (
-  <div>
-    test
-  </div>
-);
+import '../styles';
+
+class Home extends Component {
+  render() {
+    return (
+      <div>
+        test
+      </div>
+    );
+  }
+}
+
+Home.propTypes = {};
+Home.defaultProps = {};
+
+export default Home;
