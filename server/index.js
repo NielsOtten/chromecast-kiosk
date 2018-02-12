@@ -1,9 +1,7 @@
 import express from 'express';
 import next from 'next';
-import castor from './castor';
 import mongoose from 'mongoose';
-
-import settings from './settings';
+import castor from './castor';
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
