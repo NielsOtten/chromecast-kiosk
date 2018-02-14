@@ -1,7 +1,6 @@
 import express from 'express';
 import next from 'next';
 import mongoose from 'mongoose';
-import path from 'path';
 
 import castor from './castor';
 
@@ -14,6 +13,11 @@ const handle = app.getRequestHandler();
 app.prepare()
   .then(async () => {
     const server = express();
+
+    server.get('/device/:id', (req, res) => {
+      const mergedQuery = Object.assign({}, req.query, req.params);
+      return app.render(req, res, '/device', mergedQuery);
+    });
 
     server.get('*', (req, res) => handle(req, res));
 

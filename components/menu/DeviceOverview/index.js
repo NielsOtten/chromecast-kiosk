@@ -7,15 +7,13 @@ import DeviceOverview from './styled/DeviceOverview';
 
 const DeviceView = () => (
   <DeviceOverview>
-    <Device />
-    <Device />
-    <Device />
-    <Device />
-    <Device />
-    <Device />
-    <Device />
-    <Device />
-    <Device />
+    <Device id={1} />
+    <Device id={1} />
+    <Device id={1} />
+    <Device id={1} />
+    <Device id={1} />
+    <Device id={1} />
+    <Device id={1} />
   </DeviceOverview>
 );
 

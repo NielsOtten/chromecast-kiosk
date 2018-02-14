@@ -3,10 +3,13 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
+import AppBar from '../components/common/AppBar';
+
 export default class MyDocument extends Document {
-  static getInitialProps({ renderPage }) {
+  static getInitialProps({ renderPage, req }) {
     const sheet = new ServerStyleSheet();
     const page = renderPage(App => props => sheet.collectStyles(<App {...props} />));
+    this.AppBar = req.originalUrl !== '/';
     const styleTags = sheet.getStyleElement();
     return { ...page, styleTags };
   }
@@ -20,6 +23,7 @@ export default class MyDocument extends Document {
           <script src='//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js' />
         </Head>
         <body>
+          {this.AppBar && <AppBar />}
           <Main />
           <NextScript />
           <script>
